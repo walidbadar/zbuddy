@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2026 Muhammad Waleed Badar
+ * SPDX-License-Identifier: GPL-3.0-only
+ *
+ * The display has the geometry of the VIEWE board, upright like the device.
+ * uart1 is the bridge: the simulator prints the pseudo terminal it is on,
+ * tools/bridge_sim.py connects to it. The simulated flash grows to 8 MB to
+ * hold a character pack next to the settings.
+ */
+/ {
+	chosen {
+		zbuddy,bridge-uart = &uart1;
+	};
+};
+
+&uart1 {
+	status = "okay";
+};
+
+&sdl_dc {
+	width = <320>;
+	height = <480>;
+};
+
+&flashcontroller0 {
+	reg = <0x00000000 DT_SIZE_M(8)>;
+};
+
+&flash0 {
+	reg = <0x00000000 DT_SIZE_M(8)>;
+	ranges = <0x0 0x0 DT_SIZE_M(8)>;
+
+	partitions {
+		characters_partition: partition@200000 {
+			compatible = "zephyr,mapped-partition";
+			label = "characters";
+			reg = <0x00200000 DT_SIZE_M(4)>;
+		};
+	};
+};

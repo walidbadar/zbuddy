@@ -1,0 +1,6 @@
+# Copyright (c) 2026 Muhammad Waleed Badar
+# SPDX-License-Identifier: GPL-3.0-only
+# A working session, then a permission prompt. "<ms> <json>" per line.
+200 {"time":[1760812200,18000]}
+300 {"total":2,"running":1,"waiting":0,"msg":"Editing ui.c","entries":["user: port the desk pet to Zephyr","assistant: Reading the BLE reference first.","assistant: The protocol is newline-delimited JSON over NUS.","user: keep the protocol as a zephyr module","assistant: Done: lib/zbuddy builds as a module."],"tokens":41200,"tokens_today":41200}
+1200 {"total":2,"running":1,"waiting":1,"msg":"Approval needed","entries":["user: port the desk pet to Zephyr","assistant: Reading the BLE reference first.","assistant: The protocol is newline-delimited JSON over NUS.","user: keep the protocol as a zephyr module","assistant: Done: lib/zbuddy builds as a module."],"tokens":41800,"tokens_today":41800,"prompt":{"id":"p-1","tool":"Bash","hint":"west flash -d build/esp32s3"}}

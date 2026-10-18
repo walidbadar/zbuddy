@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) 2026 Muhammad Waleed Badar
+ * SPDX-License-Identifier: GPL-3.0-only
+ *
+ * VIEWE UEDX32480035E-WB-A upright (320x480), the board's own orientation.
+ * uart0 (the header pins) also speaks the protocol for tools/bridge_sim.py;
+ * the console stays on the USB serial port.
+ *
+ * Flash: the application does not use MCUboot or the second core, so the
+ * second image slots make room for a 4 MB character partition. The 192 KB
+ * storage partition keeps the settings and the Bluetooth bonds.
+ */
+/ {
+	chosen {
+		zbuddy,bridge-uart = &uart0;
+	};
+
+	aliases {
+		zbuddy-backlight = &{/lcd_backlight_en};
+	};
+};
+
+/delete-node/ &slot1_partition;
+/delete-node/ &slot0_appcpu_partition;
+/delete-node/ &slot1_appcpu_partition;
+/delete-node/ &slot0_lpcore_partition;
+/delete-node/ &slot1_lpcore_partition;
+
+&flash0 {
+	partitions {
+		characters_partition: partition@5f0000 {
+			compatible = "zephyr,mapped-partition";
+			label = "characters";
+			reg = <0x5f0000 DT_SIZE_M(4)>;
+		};
+	};
+};
+
+/* GPIO0 is both the BOOT button and the RGB LED's data line (SPI3 MOSI).
+ * Once the LED driver owns the pin it reads low, which the button driver
+ * took for a press: a long press at boot opened the menu, and LED blinks
+ * during a prompt could approve it. The LED wins; touch does the rest.
+ */
+&keys {
+	status = "disabled";
+};
+
+/* Only the panel's gamma curves are set here */
+&st7796s {
+	pgc = [f0 06 0b 07 06 05 2e 33 47 3a 17 16 2e 31];
+	ngc = [f0 09 0d 09 08 23 2e 33 46 38 13 13 2c 32];
+};

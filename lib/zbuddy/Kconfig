@@ -1,0 +1,52 @@
+# Copyright (c) 2026 Muhammad Waleed Badar
+# SPDX-License-Identifier: GPL-3.0-only
+
+menuconfig ZBUDDY
+	bool "zbuddy: Claude Desktop hardware buddy protocol and pets"
+	select BASE64
+	help
+	  The wire protocol of the Claude Desktop "Hardware Buddy" BLE API
+	  (newline-delimited JSON over the Nordic UART Service): heartbeat
+	  snapshots, permission prompts, time sync, name/owner/status commands
+	  and the character folder push. Also the pet state machine, the
+	  persistent stats and the eighteen ASCII species.
+
+if ZBUDDY
+
+config ZBUDDY_LINE_MAX
+	int "Longest JSON line accepted from the bridge (bytes)"
+	default 4608
+	help
+	  Turn events are up to 4 KB of UTF-8; longer lines are dropped.
+
+config ZBUDDY_LINES
+	int "Transcript lines kept"
+	default 8
+
+config ZBUDDY_LINE_LEN
+	int "Length of one transcript line (bytes)"
+	default 96
+
+config ZBUDDY_CHUNK_MAX
+	int "Largest decoded folder-push chunk (bytes)"
+	default 1024
+
+config ZBUDDY_CHARACTER_MAX_BYTES
+	int "Largest character pack accepted (bytes)"
+	default 1887436
+	help
+	  The desktop caps a pack at 1.8 MB; the storage must also hold it
+	  with some headroom for file system metadata.
+
+config ZBUDDY_SPECIES
+	bool "Built-in ASCII species"
+	default y
+	help
+	  Nineteen animated ASCII pets with seven states each, rendered
+	  through a small text canvas interface the application provides.
+
+config ZBUDDY_TOKENS_PER_LEVEL
+	int "Output tokens per level"
+	default 50000
+
+endif # ZBUDDY

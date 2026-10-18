@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Muhammad Waleed Badar
+# SPDX-License-Identifier: GPL-3.0-only
+# Connected but idle with the time known: the clock face.
+200 {"time":[1760812200,18000]}
+300 {"total":1,"running":0,"waiting":0,"msg":"Idle","entries":[],"tokens":1000,"tokens_today":1000}

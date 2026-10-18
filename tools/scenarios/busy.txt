@@ -1,0 +1,6 @@
+# Copyright (c) 2026 Muhammad Waleed Badar
+# SPDX-License-Identifier: GPL-3.0-only
+# Several sessions running: the busy animation and a transcript.
+200 {"time":[1760812200,18000]}
+300 {"total":4,"running":3,"waiting":0,"msg":"Running tests","entries":["user: run the unit tests on native_sim","assistant: Building tests/lib/zbuddy.","assistant: 11 of 11 tests pass.","user: now the ESP32-S3 build","assistant: Building for uedx32480035e_wb_a."],"tokens":89000,"tokens_today":89000}
+800 {"evt":"turn","role":"assistant","content":[{"type":"text","text":"The ESP32-S3 image links; flashing next."}]}

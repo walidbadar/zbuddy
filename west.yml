@@ -1,0 +1,28 @@
+# Copyright (c) 2026 Muhammad Waleed Badar
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# West manifest: "west init -m <this repo> && west update" creates a
+# workspace with Zephyr and the modules zbuddy needs. The repository itself
+# is a Zephyr module (zephyr/module.yml) and is picked up automatically.
+
+manifest:
+  self:
+    path: zbuddy
+
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: v4.5.0-rc2
+      import:
+        # Only the modules the library and the buddy application need
+        name-allowlist:
+          - cmsis_6
+          - hal_espressif
+          - littlefs
+          - lvgl
+          - mbedtls
+          - picolibc
